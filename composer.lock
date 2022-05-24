@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbab1d0130bc89e534f7e2d72528a44a",
+    "content-hash": "c918980c260d05585affc59aac3df3a7",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -1618,45 +1618,54 @@
             "time": "2022-03-20T21:55:58+00:00"
         },
         {
-            "name": "laravel/fortify",
-            "version": "v1.13.0",
+            "name": "jeffgreco13/filament-breezy",
+            "version": "v1.3.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/fortify.git",
-                "reference": "0b8e7a860f0aa4868846555f5d095d7b546ffb9c"
+                "url": "https://github.com/jeffgreco13/filament-breezy.git",
+                "reference": "51ecc72c8e98e0d3b4c1ab3e6b9f1a2744c5c259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/fortify/zipball/0b8e7a860f0aa4868846555f5d095d7b546ffb9c",
-                "reference": "0b8e7a860f0aa4868846555f5d095d7b546ffb9c",
+                "url": "https://api.github.com/repos/jeffgreco13/filament-breezy/zipball/51ecc72c8e98e0d3b4c1ab3e6b9f1a2744c5c259",
+                "reference": "51ecc72c8e98e0d3b4c1ab3e6b9f1a2744c5c259",
                 "shasum": ""
             },
             "require": {
                 "bacon/bacon-qr-code": "^2.0",
-                "ext-json": "*",
-                "illuminate/support": "^8.82|^9.0",
-                "php": "^7.3|^8.0",
-                "pragmarx/google2fa": "^7.0|^8.0"
+                "filament/filament": "^2.12",
+                "illuminate/contracts": "^8.0|^9.0",
+                "php": "^8.0|^8.1",
+                "pragmarx/google2fa": "^7.0|^8.0",
+                "spatie/laravel-package-tools": "^1.9.2"
             },
             "require-dev": {
-                "mockery/mockery": "^1.0",
+                "nunomaduro/collision": "^5.0|^6.0",
+                "nunomaduro/larastan": "^1.0",
                 "orchestra/testbench": "^6.0|^7.0",
-                "phpunit/phpunit": "^9.3"
+                "pestphp/pest": "^1.21",
+                "pestphp/pest-plugin-laravel": "^1.1",
+                "phpstan/extension-installer": "^1.1",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "spatie/laravel-ray": "^1.26"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
                 "laravel": {
                     "providers": [
-                        "Laravel\\Fortify\\FortifyServiceProvider"
-                    ]
+                        "JeffGreco13\\FilamentBreezy\\FilamentBreezyServiceProvider"
+                    ],
+                    "aliases": {
+                        "FilamentBreezy": "JeffGreco13\\FilamentBreezy\\Facades\\FilamentBreezy"
+                    }
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Laravel\\Fortify\\": "src/"
+                    "JeffGreco13\\FilamentBreezy\\": "src",
+                    "JeffGreco13\\FilamentBreezy\\Database\\Factories\\": "database/factories"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1665,20 +1674,29 @@
             ],
             "authors": [
                 {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
+                    "name": "Jeff Greco",
+                    "email": "jeff@jeffpgreco.com",
+                    "role": "Developer"
                 }
             ],
-            "description": "Backend controllers and scaffolding for Laravel authentication.",
+            "description": "A custom package for Filament with login flow, profile and teams support.",
+            "homepage": "https://github.com/jeffgreco13/filament-breezy",
             "keywords": [
-                "auth",
+                "filament-breezy",
+                "jeffgreco13",
                 "laravel"
             ],
             "support": {
-                "issues": "https://github.com/laravel/fortify/issues",
-                "source": "https://github.com/laravel/fortify"
+                "issues": "https://github.com/jeffgreco13/filament-breezy/issues",
+                "source": "https://github.com/jeffgreco13/filament-breezy/tree/v1.3.5"
             },
-            "time": "2022-05-05T14:52:14+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/jeffgreco13",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-05-19T17:09:20+00:00"
         },
         {
             "name": "laravel/framework",
@@ -6326,82 +6344,6 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
-        },
-        {
-            "name": "wychoong/filament-fortify",
-            "version": "v0.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/wychoong/filament-fortify.git",
-                "reference": "547f26d59e386603980d517e0b66d5df23ff0115"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/wychoong/filament-fortify/zipball/547f26d59e386603980d517e0b66d5df23ff0115",
-                "reference": "547f26d59e386603980d517e0b66d5df23ff0115",
-                "shasum": ""
-            },
-            "require": {
-                "filament/filament": "^2.0",
-                "illuminate/contracts": "^9.0",
-                "laravel/fortify": "^1.11",
-                "php": "^8.0",
-                "spatie/laravel-package-tools": "^1.9.2"
-            },
-            "require-dev": {
-                "nunomaduro/collision": "^6.0",
-                "orchestra/testbench": "^7.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
-                "phpunit/phpunit": "^9.5",
-                "spatie/laravel-ray": "^1.26"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "WyChoong\\FilamentFortify\\FilamentFortifyServiceProvider"
-                    ],
-                    "aliases": {
-                        "FilamentFortify": "WyChoong\\FilamentFortify\\Facades\\FilamentFortify"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "WyChoong\\FilamentFortify\\": "src",
-                    "WyChoong\\FilamentFortify\\Database\\Factories\\": "database/factories"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "wychoong",
-                    "email": "wychoong@outlook.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel Fortify for Filament Admin",
-            "homepage": "https://github.com/wychoong/filament-fortify",
-            "keywords": [
-                "filament-fortify",
-                "laravel",
-                "wychoong"
-            ],
-            "support": {
-                "issues": "https://github.com/wychoong/filament-fortify/issues",
-                "source": "https://github.com/wychoong/filament-fortify/tree/v0.2.2"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/wychoong",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-04-19T11:11:41+00:00"
         }
     ],
     "packages-dev": [

@@ -20,6 +20,30 @@ return [
         'twitter' => [
             'label' => 'Twitter',
             'icon' => 'fab-twitter',
+        ],
+        'twitter-oauth-2' => [
+            'label' => 'Twitter2',
+            'icon' => 'fab-twitter',
+        ],
+        'linkedin' => [
+            'label' => 'LinkedIn',
+            'icon' => 'fab-linkedin',
+        ],
+        'google' => [
+            'label' => 'Google',
+            'icon' => 'fab-google',
+        ],
+        'github' => [
+            'label' => 'GitHub',
+            'icon' => 'fab-github',
+        ],
+        'gitlab' => [
+            'label' => 'GitLab',
+            'icon' => 'fab-gitlab',
+        ],
+        'bitbucket' => [
+            'label' => 'BitBucket',
+            'icon' => 'fab-bitbucket',
         ]
     ],
 ];
