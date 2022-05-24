@@ -33,12 +33,12 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/oauth/callback/facebook',
+        'redirect' => 'https://3cc8a402c1.lb2.amezmo.co/oauth/callback/facebook',
     ],
     'twitter' => [
         'client_id' => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/oauth/callback/twitter',
+        'redirect' => 'https://3cc8a402c1.lb2.amezmo.co/oauth/callback/twitter',
     ],
     'twitter-oauth-2' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
