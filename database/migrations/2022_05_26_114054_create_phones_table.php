@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('number');
             $table->foreignIdFor(User::class);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

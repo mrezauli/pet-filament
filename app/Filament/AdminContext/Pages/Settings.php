@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Pages;
+namespace App\Filament\AdminContext\Pages;
 
 use Filament\Forms;
 use App\Models\User;
@@ -8,9 +8,14 @@ use Filament\Pages\Page;
 use Filament\Facades\Filament;
 use Filament\Pages\Actions\Action;
 use Illuminate\Contracts\View\View;
+use Filament\Forms\Components\Select;
+use Filament\Widgets\StatsOverviewWidget;
+use Artificertech\FilamentMultiContext\Concerns\ContextualPage;
 
 class Settings extends Page
 {
+    use ContextualPage;
+    
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament.pages.settings';

@@ -16,4 +16,4 @@ use App\Filament\Resources\UserResource;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('login');
