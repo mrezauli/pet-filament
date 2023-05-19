@@ -2,16 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PhoneResource\Pages;
-use App\Filament\Resources\PhoneResource\RelationManagers;
-use App\Models\Phone;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\Phone;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Fieldset;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TrashedFilter;
+use App\Filament\Resources\PhoneResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\PhoneResource\RelationManagers;
 
 class PhoneResource extends Resource
 {
@@ -19,14 +24,16 @@ class PhoneResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Relations Manager';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('number')
                     ->required(),
-                Forms\Components\TextInput::make('user_id')
-                    ->required(),
+                Select::make('user_id')
+                    ->relationship('user', 'name')
             ]);
     }
 
@@ -56,14 +63,14 @@ class PhoneResource extends Resource
                 Tables\Actions\ForceDeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -72,8 +79,8 @@ class PhoneResource extends Resource
             'view' => Pages\ViewPhone::route('/{record}'),
             'edit' => Pages\EditPhone::route('/{record}/edit'),
         ];
-    }    
-    
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

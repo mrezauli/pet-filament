@@ -23,6 +23,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-arrow-narrow-down';
 
+    protected static ?string $navigationGroup = 'Relations Manager';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = 6;
@@ -31,6 +33,13 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
+                Fieldset::make('Phone')
+                    ->relationship('phone')
+                    ->schema([
+                        Forms\Components\TextInput::make('number')
+                            ->required()
+                            ->numeric(),
+                    ]),
                 static::getNameFormField(),
                 static::getFatherNameFormField(),
                 static::getMotherNameFormField(),
@@ -87,6 +96,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('name_of_father'),
                 Tables\Columns\TextColumn::make('name_of_mother'),
+                Tables\Columns\TextColumn::make('phone.number'),
                 Tables\Columns\TextColumn::make('date_of_birth')
                     ->date(),
             ])
