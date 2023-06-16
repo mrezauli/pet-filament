@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Category::class);
             $table->foreignIdFor(\App\Models\User::class);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

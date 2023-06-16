@@ -42,13 +42,7 @@ class PhoneResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('number'),
-                Tables\Columns\TextColumn::make('user_id'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('user.name'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

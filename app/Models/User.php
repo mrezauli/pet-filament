@@ -70,12 +70,52 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's most recent order.
+     */
+    public function latestOrder(): HasOne
+    {
+        return $this->hasOne(Order::class)->latestOfMany();
+    }
+
+    /**
+     * Get the user's oldest order.
+     */
+    public function oldestOrder(): HasOne
+    {
+        return $this->hasOne(Order::class)->oldestOfMany();
+    }
+
+    /**
+     * Get the user's largest order.
+     */
+    // public function largestOrder(): HasOne
+    // {
+    //     return $this->hasOne(Order::class)->ofMany('price', 'max');
+    // }
+
+    /**
+     * Get the user's orders.
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get the user's largest order.
+     */
+    public function largestOrder(): HasOne
+    {
+        return $this->orders()->one()->ofMany('price', 'max');
+    }
+
+    /**
      * The roles that belong to the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class)->withPivot('id');
     }
 }

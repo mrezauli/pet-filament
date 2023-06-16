@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RoleResource\Pages;
 use App\Filament\Resources\RoleResource\RelationManagers;
+use App\Filament\Resources\RoleResource\RelationManagers\UsersRelationManager;
 use App\Models\Role;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -14,6 +15,8 @@ use Filament\Tables;
 class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
+
+    protected static ?string $inverseRelationship = 'users';
 
     protected static ?string $navigationIcon = 'heroicon-s-plus';
 
@@ -34,10 +37,7 @@ class RoleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('users.name'),
             ])
             ->filters([
                 //
@@ -47,7 +47,7 @@ class RoleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UsersRelationManager::class,
         ];
     }
 

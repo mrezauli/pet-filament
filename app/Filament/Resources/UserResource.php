@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\Pages\SortUsers;
 use App\Filament\Resources\UserResource\RelationManagers;
+use App\Filament\Resources\UserResource\RelationManagers\RolesRelationManager;
 
 class UserResource extends Resource
 {
@@ -97,6 +98,10 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name_of_father'),
                 Tables\Columns\TextColumn::make('name_of_mother'),
                 Tables\Columns\TextColumn::make('phone.number'),
+                Tables\Columns\TextColumn::make('latestOrder.title'),
+                Tables\Columns\TextColumn::make('oldestOrder.title'),
+                Tables\Columns\TextColumn::make('largestOrder.price'),
+                Tables\Columns\TextColumn::make('roles.name'),
                 Tables\Columns\TextColumn::make('date_of_birth')
                     ->date(),
             ])
@@ -150,7 +155,7 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RolesRelationManager::class
         ];
     }
 

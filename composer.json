@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "artificertech/filament-multi-context": "^2.1",
         "doctrine/dbal": "^3.0",
         "dutchcodingcompany/filament-socialite": "^0.2",
         "filament/filament": "^2.13",
@@ -18,10 +17,10 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.8",
         "owenvoke/blade-fontawesome": "^2.0",
-        "stancl/tenancy": "^3.5",
-        "wychoong/filament-fortify": "^0.3.0"
+        "staudenmeir/belongs-to-through": "^2.5"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.8",
         "fakerphp/faker": "^1.9.1",
         "laracasts/generators": "^2.0",
         "laravel/sail": "^1.18",

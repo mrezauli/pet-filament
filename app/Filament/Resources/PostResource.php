@@ -8,8 +8,10 @@ use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
 use Illuminate\Database\Query\Builder;
 use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +23,7 @@ use App\Filament\Resources\PostResource\Pages\ViewPost;
 use App\Filament\Resources\PostResource\Pages\ListPosts;
 use App\Filament\Resources\PostResource\Pages\CreatePost;
 use App\Filament\Resources\PostResource\RelationManagers;
+use App\Filament\Resources\PostResource\RelationManagers\CommentsRelationManager;
 
 class PostResource extends Resource
 {
@@ -29,6 +32,8 @@ class PostResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-eye-off';
 
     protected static ?int $navigationSort = 4;
+
+    protected static ?string $navigationGroup = 'Relations Manager';
 
     // protected function getTableQuery(): Builder
     // {
@@ -45,10 +50,16 @@ class PostResource extends Resource
                 Forms\Components\Textarea::make('content')
                     ->required()
                     ->maxLength(65535),
-                //Forms\Components\TextInput::make('category_id')
-                BelongsToSelect::make('category_id')
+                Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required(),
+                Repeater::make('comments')
+                    ->relationship()
+                    ->schema([
+                        Forms\Components\Textarea::make('content')
+                            ->required()
+                            ->maxLength(65535),
+                    ])
                 // Fieldset::make('Category')
                 //     ->relationship('category')
                 //     ->schema([
@@ -67,7 +78,7 @@ class PostResource extends Resource
         return static::getModel()::create($data);
     }
 
-    
+
 
 
 
@@ -92,7 +103,7 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CommentsRelationManager::class,
         ];
     }
 

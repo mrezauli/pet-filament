@@ -2,14 +2,16 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\Comment;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
 use App\Filament\Resources\CommentResource\Pages;
 use App\Filament\Resources\CommentResource\RelationManagers;
-use App\Models\Comment;
-use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
+use App\Filament\Resources\CommentResource\RelationManagers\PostRelationManager;
 
 class CommentResource extends Resource
 {
@@ -30,8 +32,8 @@ class CommentResource extends Resource
                 Forms\Components\Textarea::make('content')
                     ->required()
                     ->maxLength(65535),
-                Forms\Components\TextInput::make('post_id')
-                    ->required(),
+                Select::make('post_id')
+                    ->relationship('post', 'title')
             ]);
     }
 
@@ -53,9 +55,7 @@ class CommentResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array

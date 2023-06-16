@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('content');
             $table->foreignIdFor(\App\Models\Post::class);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

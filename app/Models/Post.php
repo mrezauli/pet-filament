@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'content', 'category_id', 'user_id'
+        'title', 'content', 'user_id',
+        'category_id',
     ];
 
     /**
@@ -26,9 +28,7 @@ class Post extends Model
     }
 
     /**
-     * Get all of the comments for the Post
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Get the comments for the blog post.
      */
     public function comments(): HasMany
     {
@@ -52,5 +52,4 @@ class Post extends Model
             $post->user()->associate(auth()->user());
         });
     }
-
 }

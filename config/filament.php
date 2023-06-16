@@ -3,6 +3,7 @@
 use Filament\Pages;
 use Filament\Widgets;
 use Filament\Tables\Actions\Action;
+use Filament\Fields\RelationManagerField;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
