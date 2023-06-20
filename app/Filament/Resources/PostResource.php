@@ -16,6 +16,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use App\Filament\Resources\PostResource\Pages;
 use Filament\Forms\Components\BelongsToSelect;
 use App\Filament\Resources\PostResource\Pages\EditPost;
@@ -59,7 +60,7 @@ class PostResource extends Resource
                         Forms\Components\Textarea::make('content')
                             ->required()
                             ->maxLength(65535),
-                    ])
+                    ]),
                 // Fieldset::make('Category')
                 //     ->relationship('category')
                 //     ->schema([
@@ -70,6 +71,12 @@ class PostResource extends Resource
                 // BelongsToSelect::make('user_id')
                 //     ->relationship('user', 'name')
                 //     ->required(),
+                Fieldset::make('Image')
+                    ->relationship('image')
+                    ->schema([
+                        TextInput::make('url'),
+                        FileUpload::make('image'),
+                    ])
             ]);
     }
 
