@@ -3,12 +3,15 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
+use App\Models\Post;
 use Filament\Tables;
+use App\Models\Video;
 use App\Models\Comment;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\MorphToSelect;
 use App\Filament\Resources\CommentResource\Pages;
 use App\Filament\Resources\CommentResource\RelationManagers;
 use App\Filament\Resources\CommentResource\RelationManagers\PostRelationManager;
@@ -32,8 +35,16 @@ class CommentResource extends Resource
                 Forms\Components\Textarea::make('content')
                     ->required()
                     ->maxLength(65535),
-                Select::make('post_id')
-                    ->relationship('post', 'title')
+                Forms\Components\Textarea::make('body')
+                    ->required()
+                    ->maxLength(65535),
+                MorphToSelect::make('commentable')
+                    ->types([
+                        MorphToSelect\Type::make(Video::class)->titleColumnName('title'),
+                        MorphToSelect\Type::make(Post::class)->titleColumnName('title'),
+                    ]),
+                // Select::make('post_id')
+                //     ->relationship('post', 'title')
             ]);
     }
 
@@ -42,11 +53,9 @@ class CommentResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('content'),
-                Tables\Columns\TextColumn::make('post_id'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                // Tables\Columns\TextColumn::make('post.title'),
+                Tables\Columns\TextColumn::make('commentable_type'),
+                Tables\Columns\TextColumn::make('commentable_id'),
             ])
             ->filters([
                 //

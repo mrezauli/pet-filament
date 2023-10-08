@@ -2,23 +2,23 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
 use Filament\Forms;
-use App\Models\Post;
-use App\Models\User;
 use Filament\Tables;
-use App\Models\Image;
+use App\Models\Video;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Repeater;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\MorphToSelect;
-use App\Filament\Resources\ImageResource\Pages;
+use App\Filament\Resources\VideoResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\ImageResource\RelationManagers;
+use App\Filament\Resources\VideoResource\RelationManagers;
+use App\Filament\Resources\VideoResource\RelationManagers\CommentsRelationManager;
 
-class ImageResource extends Resource
+class VideoResource extends Resource
 {
-    protected static ?string $model = Image::class;
+    protected static ?string $model = Video::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -28,12 +28,20 @@ class ImageResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('url')
                     ->required()
-                    ->maxLength(255),
-                MorphToSelect::make('imageable')
-                    ->types([
-                        MorphToSelect\Type::make(Post::class)->titleColumnName('title'),
-                        MorphToSelect\Type::make(User::class)->titleColumnName('name'),
-                    ])
+                    ->maxLength(30),
+                Forms\Components\TextInput::make('title')
+                    ->required()
+                    ->maxLength(50),
+                Repeater::make('Comment')
+                    ->relationship('comments')
+                    ->schema([
+                        Forms\Components\Textarea::make('content')
+                            ->required()
+                            ->maxLength(65535),
+                        Forms\Components\Textarea::make('body')
+                            ->required()
+                            ->maxLength(65535),
+                    ]),
             ]);
     }
 
@@ -42,8 +50,7 @@ class ImageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('url'),
-                Tables\Columns\TextColumn::make('imageable_type'),
-                Tables\Columns\TextColumn::make('imageable_id'),
+                Tables\Columns\TextColumn::make('title'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -62,17 +69,18 @@ class ImageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            CommentsRelationManager::class,
+            TagsRelationManager::class
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListImages::route('/'),
-            'create' => Pages\CreateImage::route('/create'),
-            'view' => Pages\ViewImage::route('/{record}'),
-            'edit' => Pages\EditImage::route('/{record}/edit'),
+            'index' => Pages\ListVideos::route('/'),
+            'create' => Pages\CreateVideo::route('/create'),
+            'view' => Pages\ViewVideo::route('/{record}'),
+            'edit' => Pages\EditVideo::route('/{record}/edit'),
         ];
     }
 

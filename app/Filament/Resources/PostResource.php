@@ -25,6 +25,7 @@ use App\Filament\Resources\PostResource\Pages\ListPosts;
 use App\Filament\Resources\PostResource\Pages\CreatePost;
 use App\Filament\Resources\PostResource\RelationManagers;
 use App\Filament\Resources\PostResource\RelationManagers\CommentsRelationManager;
+use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
 
 class PostResource extends Resource
 {
@@ -54,10 +55,20 @@ class PostResource extends Resource
                 Select::make('category_id')
                     ->relationship('category', 'name')
                     ->required(),
-                Repeater::make('comments')
-                    ->relationship()
+                // Repeater::make('comments')
+                //     ->relationship()
+                //     ->schema([
+                //         Forms\Components\Textarea::make('content')
+                //             ->required()
+                //             ->maxLength(65535),
+                //     ]),
+                Repeater::make('Comment')
+                    ->relationship('comments')
                     ->schema([
                         Forms\Components\Textarea::make('content')
+                            ->required()
+                            ->maxLength(65535),
+                        Forms\Components\Textarea::make('body')
                             ->required()
                             ->maxLength(65535),
                     ]),
@@ -94,13 +105,8 @@ class PostResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
-                Tables\Columns\TextColumn::make('content'),
-                Tables\Columns\TextColumn::make('category_id'),
-                Tables\Columns\TextColumn::make('user_id'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                Tables\Columns\TextColumn::make('category.name'),
+                Tables\Columns\TextColumn::make('user.name'),
             ])
             ->filters([
                 //
@@ -111,6 +117,7 @@ class PostResource extends Resource
     {
         return [
             CommentsRelationManager::class,
+            TagsRelationManager::class
         ];
     }
 

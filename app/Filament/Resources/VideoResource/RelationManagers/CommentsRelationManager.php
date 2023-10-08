@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\PostResource\RelationManagers;
+namespace App\Filament\Resources\VideoResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -16,7 +16,7 @@ class CommentsRelationManager extends RelationManager
 
     protected static ?string $inverseRelationship = 'commentable';
 
-    protected static ?string $recordTitleAttribute = 'title';
+    protected static ?string $recordTitleAttribute = 'body';
 
     public static function form(Form $form): Form
     {
@@ -35,10 +35,10 @@ class CommentsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('content'),
+                Tables\Columns\TextColumn::make('body'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                //
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
@@ -52,14 +52,6 @@ class CommentsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DissociateBulkAction::make(),
                 Tables\Actions\DeleteBulkAction::make(),
-            ]);
-    }
-
-    protected function getTableQuery(): Builder
-    {
-        return parent::getTableQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
             ]);
     }
 }

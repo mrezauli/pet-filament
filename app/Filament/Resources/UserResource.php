@@ -94,16 +94,13 @@ class UserResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('email'),
-                Tables\Columns\TextColumn::make('name_of_father'),
-                Tables\Columns\TextColumn::make('name_of_mother'),
                 Tables\Columns\TextColumn::make('phone.number'),
                 Tables\Columns\TextColumn::make('latestOrder.title'),
                 Tables\Columns\TextColumn::make('oldestOrder.title'),
                 Tables\Columns\TextColumn::make('largestOrder.price'),
+                Tables\Columns\TextColumn::make('latestImage.url'),
+                Tables\Columns\TextColumn::make('oldestImage.url'),
                 Tables\Columns\TextColumn::make('roles.name'),
-                Tables\Columns\TextColumn::make('date_of_birth')
-                    ->date(),
             ])
             ->filters([
                 //

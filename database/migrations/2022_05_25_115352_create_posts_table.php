@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title', 50);
             $table->string('name');
             $table->text('content');
+            $table->text('body');
             $table->foreignIdFor(\App\Models\Category::class);
             $table->foreignIdFor(\App\Models\User::class);
             $table->timestamps();

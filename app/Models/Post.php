@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'content', 'user_id',
+        'title', 'content', 'user_id', 'body',
         'category_id',
     ];
 
@@ -31,9 +33,17 @@ class Post extends Model
     /**
      * Get the comments for the blog post.
      */
-    public function comments(): HasMany
+    // public function comments(): HasMany
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
+
+    /**
+     * Get all of the post's comments.
+     */
+    public function comments(): MorphMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     /**
@@ -60,5 +70,13 @@ class Post extends Model
     public function image(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    /**
+     * Get all of the tags for the post.
+     */
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }

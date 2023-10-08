@@ -2,23 +2,21 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Tag;
 use Filament\Forms;
-use App\Models\Post;
-use App\Models\User;
 use Filament\Tables;
-use App\Models\Image;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\MorphToSelect;
-use App\Filament\Resources\ImageResource\Pages;
+use App\Filament\Resources\TagResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\ImageResource\RelationManagers;
+use App\Filament\Resources\TagResource\RelationManagers;
 
-class ImageResource extends Resource
+class TagResource extends Resource
 {
-    protected static ?string $model = Image::class;
+    protected static ?string $model = Tag::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -26,14 +24,10 @@ class ImageResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('url')
+                Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
-                MorphToSelect::make('imageable')
-                    ->types([
-                        MorphToSelect\Type::make(Post::class)->titleColumnName('title'),
-                        MorphToSelect\Type::make(User::class)->titleColumnName('name'),
-                    ])
+                    ->maxLength(50),
+                
             ]);
     }
 
@@ -41,9 +35,7 @@ class ImageResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('url'),
-                Tables\Columns\TextColumn::make('imageable_type'),
-                Tables\Columns\TextColumn::make('imageable_id'),
+                Tables\Columns\TextColumn::make('name'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -69,10 +61,10 @@ class ImageResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListImages::route('/'),
-            'create' => Pages\CreateImage::route('/create'),
-            'view' => Pages\ViewImage::route('/{record}'),
-            'edit' => Pages\EditImage::route('/{record}/edit'),
+            'index' => Pages\ListTags::route('/'),
+            'create' => Pages\CreateTag::route('/create'),
+            'view' => Pages\ViewTag::route('/{record}'),
+            'edit' => Pages\EditTag::route('/{record}/edit'),
         ];
     }
 
